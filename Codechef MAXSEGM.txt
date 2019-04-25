@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        ll n;
+        cin>>n;
+        ll arr[n],brr[n];
+         for(int i=0;i<n;i++)
+         cin>>arr[i];
+            for(int i=0;i<n;i++)
+            cin>>brr[i];    
+          for(int i=1;i<n;i++){
+          brr[i]+=brr[i-1];}
+        int l=0,r=0;
+        map<ll,ll>mp;
+        ll max1=-1;
+        for(int i=0;i<n;i++)
+        {
+            if(mp[arr[i]]>0)
+            {
+                while(arr[l]!=arr[i]&&i<n)
+                {
+                    mp[arr[l]]=0;
+                    l++;
+                    
+                }
+                mp[arr[i]]=0;
+                l++;
+            }
+            ++mp[arr[i]];
+            if(l!=0)
+            max1=max(max1,brr[i]-brr[l-1]);
+            else
+            max1=max(max1,brr[i]);
+           
+        }
+        
+        cout<<max1<<'\n';
+    }
+    return 0;
+}
